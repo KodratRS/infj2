@@ -2507,16 +2507,15 @@
     margin-right: 15px;
     margin-bottom: 10px;
 }
-/* ==================== 1. RESPONSIVE & TOGGLE STYLES FINAL ==================== */
-/* Hanya aktif di layar lebar maksimal 768px (Mobile) */
+/* ==================== 1. RESPONSIF & ANIMASI HALUS FIX ==================== */
 @media (max-width: 768px) {
     
-    /* A. GLOBAL LAYOUT RESET (Membuat Tampilan Rapi di HP) */
+    /* A. GLOBAL LAYOUT RESET */
     section {
-        padding: 40px 15px !important; /* Padding section lebih kecil */
+        padding: 40px 15px !important; 
     }
     .grid-4, .grid-3, .grid-2 {
-        grid-template-columns: 1fr !important; /* Semua grid jadi 1 kolom */
+        grid-template-columns: 1fr !important;
         gap: 12px !important; 
     }
     
@@ -2526,18 +2525,17 @@
         height: auto !important;
         padding: 15px 20px !important;
         margin-bottom: 5px !important;
-        transition: all 0.4s ease !important; 
-        transform: none !important; /* Matikan transform bawaan */
-        box-shadow: none !important; /* Hilangkan bayangan bawaan */
+        transition: all 0.4s ease-in-out !important; /* Gunakan ease-in-out untuk keseluruhan card */
+        transform: none !important; 
+        box-shadow: none !important; 
     }
     
-    /* Nonaktifkan Hover Effect di Mobile */
     .skill-card:hover, .study-card:hover, .hobby-card:hover, .music-card:hover {
         transform: none !important;
         box-shadow: none !important;
     }
 
-    /* C. KONTEN YANG DI-HIDE SECARA DEFAULT (Sangat Spesifik menggunakan :not(.is-open) ) */
+    /* C. KONTEN YANG DI-HIDE (MENGGUNAKAN MAX-HEIGHT UNTUK SMOOTH TRANSITION) */
     .skill-card:not(.is-open) > .skill-desc, 
     .study-card:not(.is-open) > .study-desc, 
     .project-small:not(.is-open) > .project-small-desc,
@@ -2550,11 +2548,21 @@
     .music-card:not(.is-open) .spotify-embed, 
     .poem-card:not(.is-open) > .poem-text, 
     .infj-trait:not(.is-open) > .trait-desc {
-        display: none !important; 
+        /* Kunci konten */
+        max-height: 0 !important;
         opacity: 0 !important;
+        overflow: hidden !important;
+        
+        /* Hilangkan margin/padding yang mengganggu kompresi */
+        margin-top: 0 !important; 
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        
+        /* Tambahkan transisi langsung ke konten */
+        transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out, margin 0.5s ease-in-out !important;
     }
     
-    /* D. Style Tombol Toggle */
+    /* D. Style Tombol Toggle (Tidak ada perubahan) */
     .mobile-toggle-btn {
         display: block !important; 
         margin-top: 10px;
@@ -2578,6 +2586,7 @@
         box-shadow: 0 0 40px rgba(0, 0, 0, 0.5) !important;
     }
 
+    /* Buka konten (menggunakan max-height besar) */
     .is-open .skill-desc, 
     .is-open .study-desc, 
     .is-open .project-small-desc, 
@@ -2588,20 +2597,27 @@
     .is-open .spotify-embed, 
     .is-open .poem-text, 
     .is-open .trait-desc {
-        display: block !important;
-        animation: fadeIn 0.5s ease;
-        margin-top: 15px !important;
+        max-height: 1000px !important; /* Harus lebih besar dari konten terpanjang */
         opacity: 1 !important;
+        
+        /* Kembalikan margin yang diinginkan saat terbuka */
+        margin-top: 15px !important; 
+        padding-top: initial !important; 
+        padding-bottom: initial !important; 
     }
     
     /* Books: Gambar dibuat sangat kecil (preview) saat dibuka */
     .is-open .book-cover {
+        max-height: 1000px !important;
+        opacity: 1 !important;
         display: flex !important;
         height: 100px !important; 
         width: 70px !important;
         float: left;
         margin-right: 15px;
         margin-bottom: 10px;
+        /* Tambahkan transisi di sini juga untuk gambar */
+        transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out, margin 0.5s ease-in-out !important;
     }
 }
     </style>
@@ -3414,6 +3430,92 @@
         });
     } catch (error) {
         console.error("Script Toggle Gagal Dijalankan:", error);
+    }
+})();
+</script>
+<script>
+// Fungsi yang akan dijalankan segera untuk menghindari konflik
+(function() {
+    
+    // Jalankan hanya di layar HP (lebar < 769px)
+    if (window.innerWidth < 769) {
+        
+        // Selektor Card yang Diminta (Semua)
+        const cardSelectors = [
+            '.infj-trait', '.skill-card', '.study-card', 
+            '.project-small', '.book-card', '.hobby-card', 
+            '.music-card', '.poem-card' 
+        ];
+
+        try {
+            const allCards = document.querySelectorAll(cardSelectors.join(','));
+
+            allCards.forEach(card => {
+                // Pencegahan duplikasi tombol
+                if (card.querySelector('.mobile-toggle-btn')) {
+                    return;
+                }
+
+                // 1. Buat Tombol
+                const btn = document.createElement('div');
+                btn.className = 'mobile-toggle-btn';
+                btn.innerText = 'Lihat Selengkapnya +';
+
+                // 2. Tentukan Area Penempelan Tombol & Isolasi Event
+                
+                let targetElement = card; // Default penempelan
+
+                // Kasus Khusus: Project Small (Mungkin perlu ditempel di dalam wrapper)
+                if (card.classList.contains('project-small')) {
+                    const contentArea = card.querySelector('.project-content');
+                    if (contentArea) {
+                        targetElement = contentArea;
+                    }
+                }
+                // Kasus Khusus: Music Card (Karena ada Spotify Embed yang menutupi)
+                else if (card.classList.contains('music-card')) {
+                    // Coba sembunyikan embed-nya dulu di mobile, agar tombol bisa di-tap.
+                    const embed = card.querySelector('.spotify-embed');
+                    if (embed) {
+                        embed.style.display = 'none';
+                        // Tombol akan ditempel di card
+                    }
+                }
+                
+                // Tempel Tombol
+                targetElement.appendChild(btn); 
+
+                // 3. Pasang Event Klik
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Blok event agar tidak mengganggu script lain/click bawaan card
+                    
+                    card.classList.toggle('is-open');
+
+                    // Ubah Teks Tombol & Style
+                    if (card.classList.contains('is-open')) {
+                        btn.innerText = 'Tutup -';
+                        btn.style.background = '#c9a961';
+                        btn.style.color = '#0a1a2e';
+                        
+                        // Khusus Music Card: Tampilkan Embed saat dibuka
+                        if (card.classList.contains('music-card') && embed) {
+                            embed.style.display = 'block';
+                        }
+                    } else {
+                        btn.innerText = 'Lihat Selengkapnya +';
+                        btn.style.background = 'rgba(201, 169, 97, 0.1)';
+                        btn.style.color = '#c9a961';
+
+                        // Khusus Music Card: Sembunyikan lagi Embed saat ditutup
+                         if (card.classList.contains('music-card') && embed) {
+                            embed.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        } catch (error) {
+            console.error("Script Toggle Gagal Dijalankan:", error);
+        }
     }
 })();
 </script>
