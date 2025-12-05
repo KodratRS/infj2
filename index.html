@@ -2442,196 +2442,119 @@
         margin-top: -10px !important;
     }
 }
+/* ==================== CSS TOGGLE KHUSUS CARD TERTENTU ==================== */
 
-@media (max-width: 767px) {
- 
-    .skills-grid, .study-grid,.book-card, .hobbies-grid, .poems-grid, .projects-secondary {
-        gap: 12px !important;
-    }
-
-    .skill-card, .study-card, .hobby-card, .poem-card, .book-card, .project-small {
-        padding: 15px 20px !important;
-        min-height: auto !important;
-        height: auto !important;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-    }
-
-    
-    .skill-desc, 
-    .study-desc, 
-    .hobby-desc, .hobby-number,
-    .poem-text, 
-    .book-desc,
-    .project-small-desc, .project-small-icon {
-        display: none; 
-        margin-top: 15px;
-        width: 100%;
-        animation: fadeIn 0.5s ease;
-    }
-    
-    .card-expanded .skill-desc, 
-    .card-expanded .study-desc, 
-    .card-expanded .hobby-desc, .card-expanded .hobby-number,
-    .card-expanded .poem-text, 
-    .card-expanded .book-desc, 
-    .card-expanded .project-small-desc, .card-expanded .project-small-icon {
-        display: block;
-    }
-
-    .skill-title, .study-title, .project-title, .hobby-title, .music-title, .poem-title, .book-title, .project-small-title {
-        font-size: 18px !important;
-        margin-bottom: 5px !important;
-    }
-    
-    .skill-number, .study-label, .project-number, .trait-label {
-        margin-bottom: 5px !important;
-        font-size: 9px !important;
-    }
-
-    .toggle-btn {
-        margin-top: 8px;
-        background: rgba(201, 169, 97, 0.15);
-        border: 1px solid var(--gold-dark);
-        color: var(--gold-bright);
-        padding: 6px 12px;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 11px;
-        border-radius: 20px;
-        cursor: pointer;
-        width: 100%;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        transition: all 0.3s ease;
-    }
-
-    .toggle-btn:hover {
-        background: var(--gold-bright);
-        color: var(--bg-deepest);
-    }
+/* 1. KONTEN YANG DI-HIDE SECARA DEFAULT (List Mode Awal) */
+/* Pastikan display: none menang terhadap style bawaan */
+.skill-card:not(.is-open) > .skill-desc, 
+.study-card:not(.is-open) > .study-desc, 
+.project-small:not(.is-open) > .project-small-desc,
+.project-small:not(.is-open) > .project-small-icon,
+.book-card:not(.is-open) > .book-cover, 
+.book-card:not(.is-open) > .book-author, 
+.book-card:not(.is-open) > .book-desc,
+.hobby-card:not(.is-open) > .hobby-desc, 
+.music-card:not(.is-open) > .music-desc, 
+.music-card:not(.is-open) .spotify-embed, 
+.poem-card:not(.is-open) > .poem-text, 
+.infj-trait:not(.is-open) > .trait-desc {
+    display: none !important; 
+    opacity: 0 !important;
 }
+
+/* 2. Style Tombol Toggle */
+.mobile-toggle-btn {
+    display: block; /* Pastikan tombol terlihat */
+    margin-top: 10px;
+    padding: 6px 15px;
+    background: rgba(201, 169, 97, 0.1);
+    border: 1px solid #c9a961;
+    color: #c9a961;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 50px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+/* 3. TAMPILKAN KONTEN SAAT CLASS .is-open AKTIF */
+/* Tampilkan semua deskripsi yang tersembunyi */
+.is-open .skill-desc, 
+.is-open .study-desc, 
+.is-open .project-small-desc, 
+.is-open .project-small-icon,
+.is-open .book-desc, 
+.is-open .hobby-desc, 
+.is-open .music-desc, 
+.is-open .spotify-embed, 
+.is-open .poem-text, 
+.is-open .trait-desc {
+    display: block !important;
+    animation: fadeIn 0.5s ease;
+    margin-top: 15px !important;
+    opacity: 1 !important;
+}
+
+/* Books: Gambar dibuat sangat kecil (preview) saat dibuka */
+.is-open .book-cover {
+    display: flex !important;
+    height: 100px !important; 
+    width: 70px !important;
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 10px;
+}
+/* ==================== 1. RESPONSIVE & TOGGLE STYLES FINAL ==================== */
+/* Hanya aktif di layar lebar maksimal 768px (Mobile) */
 @media (max-width: 768px) {
     
-    
-   
-    #skills .skill-desc { display: none !important; }
-    #study .study-desc { display: none !important; }
-    #projects .project-desc { 
-        display: none !important; 
-    }
-    
-    #books .book-desc{ display: none !important; }
-    #hobbies .hobby-desc, #hobbies .hobby-number { display: none !important; }
-    #poems .poem-text { display: none !important; }
-    #thoughts .thought-text { display: none !important; }
-    
-    .infj-trait .trait-desc { display: none !important; }
-
-
-
-    .skill-card, .study-card, .hobby-card, .poem-card, .project-small, .infj-trait {
-        min-height: 0 !important;
-        height: auto !important;
-        padding: 15px 20px !important;
-        margin-bottom: 10px !important;
-        transform: none !important; 
-    }
-   
-    .mobile-toggle-btn {
-        display: block !important; 
-        margin-top: 8px;
-        padding: 6px 15px;
-        background: rgba(201, 169, 97, 0.1);
-        border: 1px solid #c9a961;
-        color: #c9a961;
-        font-size: 10px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        border-radius: 50px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        width: 100%;
-        text-align: center;
-    }
-
-    
-    .is-open {
-       
-        padding: 25px !important; 
-        background: rgba(26, 58, 46, 0.6) !important;
-        border: 1px solid #c9a961 !important;
-    }
-    
-    
-    .is-open .skill-desc, 
-    .is-open .study-desc, 
-    .is-open .hobby-desc, .is-open .hobby-number,
-    .is-open .poem-text, 
-    .is-open .book-desc,
-    .is-open .project-small-desc, .is-open .project-small-icon,
-    .is-open .trait-desc {
-        display: block !important; 
-        animation: fadeIn 0.5s ease;
-        margin-top: 15px !important;
-    }
-    
-    .is-open .project-image, .is-open .book-cover {
-        display: flex !important;
-        height: auto !important;
-        margin-bottom: 15px !important;
-    }
-}
-/* ==================== RESPONSIF KOMPREHENSIF DAN LIST MODE FIX ==================== */
-@media (max-width: 768px) {
-    
-    /* Global Reset dan Layout Rapat */
+    /* A. GLOBAL LAYOUT RESET (Membuat Tampilan Rapi di HP) */
     section {
-        padding: 40px 15px !important; /* Kurangi padding section */
+        padding: 40px 15px !important; /* Padding section lebih kecil */
     }
     .grid-4, .grid-3, .grid-2 {
         grid-template-columns: 1fr !important; /* Semua grid jadi 1 kolom */
-        gap: 12px !important; /* Kurangi jarak antar card */
+        gap: 12px !important; 
     }
     
-    /* Reset Card ke Mode List (Sangat Spesifik) */
-    .skill-card, .study-card, .project-card, .hobby-card, .music-card, .poem-card, .thought-card, .book-card, .project-small, .infj-trait {
+    /* B. CARD RESET & LIST MODE */
+    .skill-card, .study-card, .project-small, .book-card, .hobby-card, .music-card, .poem-card, .infj-trait {
         min-height: 0 !important;
         height: auto !important;
         padding: 15px 20px !important;
         margin-bottom: 5px !important;
-        transition: all 0.5s ease !important;
-        transform: none !important; /* Matikan semua transform/hover efek */
+        transition: all 0.4s ease !important; 
+        transform: none !important; /* Matikan transform bawaan */
         box-shadow: none !important; /* Hilangkan bayangan bawaan */
     }
     
     /* Nonaktifkan Hover Effect di Mobile */
-    .skill-card:hover, .study-card:hover, .project-card:hover, .hobby-card:hover, .music-card:hover {
+    .skill-card:hover, .study-card:hover, .hobby-card:hover, .music-card:hover {
         transform: none !important;
         box-shadow: none !important;
     }
 
-    /* Sembunyikan KONTEN DESKRIPTIF/BESAR SECARA DEFAULT */
-    .skill-card > .skill-desc, 
-    .study-card > .study-desc, 
-    .project-card .project-desc, 
-    .project-card .project-tags, 
-    .project-card .project-image, 
-    .hobby-card > .hobby-desc, 
-    .music-card > .music-desc, 
-    .music-card .spotify-embed, 
-    .poem-card > .poem-text, 
-    .thought-card > .thought-text, 
-    .book-card > .book-desc, 
-    .book-card > .book-cover, 
-    .book-card > .book-author,
-    .infj-trait > .trait-desc {
+    /* C. KONTEN YANG DI-HIDE SECARA DEFAULT (Sangat Spesifik menggunakan :not(.is-open) ) */
+    .skill-card:not(.is-open) > .skill-desc, 
+    .study-card:not(.is-open) > .study-desc, 
+    .project-small:not(.is-open) > .project-small-desc,
+    .project-small:not(.is-open) > .project-small-icon,
+    .book-card:not(.is-open) > .book-cover, 
+    .book-card:not(.is-open) > .book-author, 
+    .book-card:not(.is-open) > .book-desc,
+    .hobby-card:not(.is-open) > .hobby-desc, 
+    .music-card:not(.is-open) > .music-desc, 
+    .music-card:not(.is-open) .spotify-embed, 
+    .poem-card:not(.is-open) > .poem-text, 
+    .infj-trait:not(.is-open) > .trait-desc {
         display: none !important; 
         opacity: 0 !important;
     }
     
-    /* Tombol Lihat Selengkapnya */
+    /* D. Style Tombol Toggle */
     .mobile-toggle-btn {
         display: block !important; 
         margin-top: 10px;
@@ -2648,7 +2571,7 @@
         text-align: center;
     }
 
-    /* TAMPILKAN KONTEN SAAT IS-OPEN (DIKLIK) */
+    /* E. TAMPILKAN KONTEN SAAT CLASS .is-open AKTIF */
     .is-open {
         padding: 25px !important; 
         background: rgba(26, 58, 46, 0.8) !important;
@@ -2657,89 +2580,13 @@
 
     .is-open .skill-desc, 
     .is-open .study-desc, 
-    .is-open .project-desc, 
-    .is-open .project-tags, 
-    .is-open .project-image, 
-    .is-open .hobby-desc, 
-    .is-open .music-desc, 
-    .is-open .spotify-embed, 
-    .is-open .poem-text, 
-    .is-open .thought-text, 
+    .is-open .project-small-desc, 
+    .is-open .project-small-icon,
     .is-open .book-desc, 
-    .is-open .book-cover, 
-    .is-open .book-author,
-    .is-open .trait-desc {
-        display: block !important;
-        animation: fadeIn 0.5s ease;
-        margin-top: 15px !important;
-        opacity: 1 !important;
-    }
-    
-    .is-open .project-image, .is-open .book-cover {
-        display: flex !important;
-        height: auto !important;
-        margin-bottom: 15px !important;
-    }
-}
-@media (max-width: 768px) {
-    
-    .skill-card, .study-card, .hobby-card, .poem-card, .book-card, .project-small, .infj-trait {
-      
-        min-height: 0 !important;
-        height: auto !important;
-        padding: 15px 20px !important;
-        margin-bottom: 12px !important;
-        transition: all 0.5s ease !important; 
-        transform: none !important;
-    }
-    
-  
-    .skill-card > .skill-desc, 
-    .study-card > .study-desc, 
-    .hobby-card > .hobby-desc, 
-    .music-card > .music-desc, 
-    .music-card .spotify-embed, 
-    .poem-card > .poem-text, 
-    .book-card > .book-desc, 
-    .infj-trait > .trait-desc {
-        display: none !important; 
-        opacity: 0 !important;
-    }
-
-    .mobile-toggle-btn {
-        display: block !important; 
-        margin-top: 10px;
-        padding: 6px 15px;
-        background: rgba(201, 169, 97, 0.1);
-        border: 1px solid #c9a961;
-        color: #c9a961;
-        font-size: 11px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        border-radius: 50px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        width: 100%;
-        text-align: center;
-    }
-
-    
-    .is-open {
-        
-        padding: 25px !important; 
-        background: rgba(26, 58, 46, 0.8) !important;
-        box-shadow: 0 0 40px rgba(0, 0, 0, 0.5) !important;
-        transform: none !important; 
-    }
-
-    .is-open .skill-desc, 
-    .is-open .study-desc, 
-    .is-open .project-desc, 
     .is-open .hobby-desc, 
     .is-open .music-desc, 
     .is-open .spotify-embed, 
     .is-open .poem-text, 
-    .is-open .book-desc,
     .is-open .trait-desc {
         display: block !important;
         animation: fadeIn 0.5s ease;
@@ -2747,19 +2594,20 @@
         opacity: 1 !important;
     }
     
-    
-    .is-open .project-image, .is-open .book-cover {
+    /* Books: Gambar dibuat sangat kecil (preview) saat dibuka */
+    .is-open .book-cover {
         display: flex !important;
-        height: auto !important;
-        margin-bottom: 15px !important;
+        height: 100px !important; 
+        width: 70px !important;
+        float: left;
+        margin-right: 15px;
+        margin-bottom: 10px;
     }
 }
-</style>
     </style>
   <style>@view-transition { navigation: auto; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
   <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
-
  </head>
  <body><!-- Floating Particles -->
   <div class="particles-container">
@@ -3510,51 +3358,49 @@
                 mapToEditPanelValues
             });
         }
-        
     </script>
     <script>
-document.addEventListener("DOMContentLoaded", function() {
-    // Jalankan hanya di layar HP
-    if (window.innerWidth < 769) { // Menggunakan 769px sebagai batas amannya
-        
-        const cardSelectors = [
-            '.skill-card', '.study-card', '.project-card', '.hobby-card', 
-            '.music-card', '.poem-card', '.thought-card', '.book-card', 
-            '.project-small', '.infj-trait'
-        ];
+// Menjalankan skrip segera untuk menghindari konflik
+(function() {
+    
+    // Selektor Card yang Diminta (Hanya akan memproses card ini)
+    const cardSelectors = [
+        '.infj-trait', '.skill-card', '.study-card', 
+        '.project-small', '.book-card', '.hobby-card', 
+        '.music-card', '.poem-card' 
+    ];
 
+    try {
         const allCards = document.querySelectorAll(cardSelectors.join(','));
 
         allCards.forEach(card => {
-            
-            // 1. Cek apakah tombol sudah ada, jika ada, skip (pencegahan duplikasi)
+            // Pencegahan duplikasi tombol
             if (card.querySelector('.mobile-toggle-btn')) {
                 return;
             }
 
-            // 2. Buat Tombol
+            // 1. Buat Tombol
             const btn = document.createElement('div');
             btn.className = 'mobile-toggle-btn';
             btn.innerText = 'Lihat Selengkapnya +';
 
-            // 3. Tempel Tombol ke dalam Card
-            const contentArea = card.querySelector('.project-content');
+            // 2. Tempel Tombol ke dalam Card
+            const contentArea = card.querySelector('.project-content'); 
             if (contentArea) {
-                // Untuk project card yang punya content wrapper
-                contentArea.appendChild(btn);
+                // Untuk project card, jika ada content wrapper
+                contentArea.appendChild(btn); 
             } else {
-                // Untuk card normal lainnya
-                card.appendChild(btn);
+                // Untuk card lainnya
+                card.appendChild(btn); 
             }
 
-            // 4. Pasang Event Klik
+            // 3. Pasang Event Klik
             btn.addEventListener('click', function(e) {
-                e.stopPropagation(); 
+                e.stopPropagation(); // Blok event agar tidak mengganggu script lain
                 
-                // Toggle Class Open pada card parent
                 card.classList.toggle('is-open');
 
-                // Ubah Teks Tombol
+                // Ubah Teks Tombol & Style
                 if (card.classList.contains('is-open')) {
                     btn.innerText = 'Tutup -';
                     btn.style.background = '#c9a961';
@@ -3566,127 +3412,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             });
         });
-    }
-});
-</script>
-<script>
-// Fungsi yang akan dijalankan segera (tanpa menunggu DOMContentLoaded)
-(function() {
-    // Jalankan hanya di layar HP (lebar < 769px)
-    if (window.innerWidth < 769) {
-        
-        const cardSelectors = [
-            '.skill-card', '.study-card', '.project-card', '.hobby-card', 
-            '.music-card', '.poem-card', '.thought-card', '.book-card', 
-            '.project-small', '.infj-trait'
-        ];
-
-        // Bungkus dalam try/catch untuk mencegah skrip lain menghentikan fungsi ini
-        try {
-            const allCards = document.querySelectorAll(cardSelectors.join(','));
-
-            allCards.forEach(card => {
-                // Cek apakah tombol sudah ada
-                if (card.querySelector('.mobile-toggle-btn')) {
-                    return;
-                }
-
-                // 1. Buat Tombol
-                const btn = document.createElement('div');
-                btn.className = 'mobile-toggle-btn';
-                btn.innerText = 'Lihat Selengkapnya +';
-
-                // 2. Tempel Tombol ke dalam Card
-                const contentArea = card.querySelector('.project-content'); 
-                if (contentArea) {
-                    contentArea.appendChild(btn); 
-                } else {
-                    card.appendChild(btn); 
-                }
-
-                // 3. Pasang Event Klik
-                btn.addEventListener('click', function(e) {
-                    e.stopPropagation(); // Blok event agar tidak mengganggu script lain
-                    
-                    card.classList.toggle('is-open');
-
-                    // Ubah Teks Tombol & Style
-                    if (card.classList.contains('is-open')) {
-                        btn.innerText = 'Tutup -';
-                        btn.style.background = '#c9a961';
-                        btn.style.color = '#0a1a2e';
-                    } else {
-                        btn.innerText = 'Lihat Selengkapnya +';
-                        btn.style.background = 'rgba(201, 169, 97, 0.1)';
-                        btn.style.color = '#c9a961';
-                    }
-                });
-            });
-        } catch (error) {
-            console.error("Compact card script error:", error);
-        }
+    } catch (error) {
+        console.error("Script Toggle Gagal Dijalankan:", error);
     }
 })();
 </script>
-<script>
-// Fungsi yang akan dijalankan segera (tanpa menunggu DOMContentLoaded)
-(function() {
-    // Jalankan hanya di layar HP (lebar < 769px)
-    if (window.innerWidth < 769) {
-        
-        const cardSelectors = [
-            '.skill-card', '.study-card', '.project-card', '.hobby-card', 
-            '.music-card', '.poem-card', '.thought-card', '.book-card', 
-            '.project-small', '.infj-trait'
-        ];
-
-        // Bungkus dalam try/catch
-        try {
-            const allCards = document.querySelectorAll(cardSelectors.join(','));
-
-            allCards.forEach(card => {
-                // Cek apakah tombol sudah ada
-                if (card.querySelector('.mobile-toggle-btn')) {
-                    return;
-                }
-
-                // 1. Buat Tombol
-                const btn = document.createElement('div');
-                btn.className = 'mobile-toggle-btn';
-                btn.innerText = 'Lihat Selengkapnya +';
-
-                // 2. Tempel Tombol ke dalam Card
-                const contentArea = card.querySelector('.project-content'); 
-                if (contentArea) {
-                    contentArea.appendChild(btn); 
-                } else {
-                    card.appendChild(btn); 
-                }
-
-                // 3. Pasang Event Klik
-                btn.addEventListener('click', function(e) {
-                    e.stopPropagation(); // Blok event agar tidak mengganggu script lain
-                    
-                    card.classList.toggle('is-open');
-
-                    // Ubah Teks Tombol & Style
-                    if (card.classList.contains('is-open')) {
-                        btn.innerText = 'Tutup -';
-                        btn.style.background = '#c9a961';
-                        btn.style.color = '#0a1a2e';
-                    } else {
-                        btn.innerText = 'Lihat Selengkapnya +';
-                        btn.style.background = 'rgba(201, 169, 97, 0.1)';
-                        btn.style.color = '#c9a961';
-                    }
-                });
-            });
-        } catch (error) {
-            // Error ditangkap, tapi skrip tidak akan crash
-            console.error("Script Compact Mode Gagal Dijalankan:", error);
-        }
-    }
-})();
-</script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a8c053dc03afd64',t:'MTc2NDg1ODgyMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a8c053dc03afd64',t:'MTc2NDg1ODgyMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
