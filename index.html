@@ -2442,15 +2442,14 @@
         margin-top: -10px !important;
     }
 }
-/* ================= MOBILE COMPACT MODE ================= */
+
 @media (max-width: 767px) {
-    /* 1. Reset Grid biar lebih rapet */
-    .skills-grid, .study-grid, .projects-grid, .books-grid, .hobbies-grid, .music-grid, .poems-grid, .thoughts-grid, .projects-secondary {
+ 
+    .skills-grid, .study-grid,.book-card, .hobbies-grid, .poems-grid, .projects-secondary {
         gap: 12px !important;
     }
 
-    /* 2. Bikin semua card jadi kecil/compact */
-    .skill-card, .study-card, .project-card, .hobby-card, .music-card, .poem-card, .thought-card, .book-card, .project-small {
+    .skill-card, .study-card, .hobby-card, .poem-card, .book-card, .project-small {
         padding: 15px 20px !important;
         min-height: auto !important;
         height: auto !important;
@@ -2460,36 +2459,28 @@
         align-items: flex-start;
     }
 
-    /* 3. Sembunyikan Deskripsi & Elemen Besar secara default */
+    
     .skill-desc, 
     .study-desc, 
-    .project-desc, .project-tags, .project-image, /* Sembunyikan gambar project biar hemat tempat */
     .hobby-desc, .hobby-number,
-    .music-desc, .spotify-embed,
     .poem-text, 
-    .thought-text,
-    .book-desc, .book-cover, .book-author,
+    .book-desc,
     .project-small-desc, .project-small-icon {
-        display: none; /* Hilang dulu */
+        display: none; 
         margin-top: 15px;
         width: 100%;
         animation: fadeIn 0.5s ease;
     }
     
-    /* Tampilkan elemen jika class 'active' ditambahkan via JS */
     .card-expanded .skill-desc, 
     .card-expanded .study-desc, 
-    .card-expanded .project-desc, .card-expanded .project-tags, .card-expanded .project-image,
     .card-expanded .hobby-desc, .card-expanded .hobby-number,
-    .card-expanded .music-desc, .card-expanded .spotify-embed,
     .card-expanded .poem-text, 
-    .card-expanded .thought-text,
-    .card-expanded .book-desc, .card-expanded .book-cover, .card-expanded .book-author,
+    .card-expanded .book-desc, 
     .card-expanded .project-small-desc, .card-expanded .project-small-icon {
         display: block;
     }
 
-    /* 4. Styling Judul biar lebih rapi di mode compact */
     .skill-title, .study-title, .project-title, .hobby-title, .music-title, .poem-title, .book-title, .project-small-title {
         font-size: 18px !important;
         margin-bottom: 5px !important;
@@ -2500,7 +2491,6 @@
         font-size: 9px !important;
     }
 
-    /* 5. Tombol "Lihat Selengkapnya" */
     .toggle-btn {
         margin-top: 8px;
         background: rgba(201, 169, 97, 0.15);
@@ -2521,62 +2511,36 @@
         background: var(--gold-bright);
         color: var(--bg-deepest);
     }
-    
-    /* Khusus Card Project biar image muncul bagus pas di expand */
-    .card-expanded .project-image {
-        height: 150px !important;
-        margin-bottom: 15px;
-        border-radius: 8px;
-    }
 }
 @media (max-width: 768px) {
     
-    /* 1. KONTEN YANG DI-HIDE (Menggunakan ID Section sebagai Parent untuk Specifity Maksimal) */
     
-    /* Skills */
+   
     #skills .skill-desc { display: none !important; }
-
-    /* Study */
     #study .study-desc { display: none !important; }
-
-    /* Projects */
-    #projects .project-desc, 
-    #projects .project-tags, 
-    #projects .project-image, 
-    #projects .project-small-desc, 
-    #projects .project-small-icon { 
+    #projects .project-desc { 
         display: none !important; 
     }
-
-    /* Books */
-    #books .book-desc, #books .book-cover, #books .book-author { display: none !important; }
-
-    /* Hobbies */
-    #hobbies .hobby-desc, #hobbies .hobby-number { display: none !important; }
-
-    /* Music */
-    #music .music-desc, #music .spotify-embed { display: none !important; }
     
-    /* Poems & Thoughts */
+    #books .book-desc{ display: none !important; }
+    #hobbies .hobby-desc, #hobbies .hobby-number { display: none !important; }
     #poems .poem-text { display: none !important; }
     #thoughts .thought-text { display: none !important; }
     
-    /* INFJ (atau Traits lain) */
     .infj-trait .trait-desc { display: none !important; }
 
 
-    /* 2. STYLE UNTUK CARD SAAT JADI LIST (Tipis) */
-    .skill-card, .study-card, .project-card, .hobby-card, .music-card, .poem-card, .thought-card, .book-card, .project-small, .infj-trait {
+
+    .skill-card, .study-card, .hobby-card, .poem-card, .project-small, .infj-trait {
         min-height: 0 !important;
         height: auto !important;
         padding: 15px 20px !important;
         margin-bottom: 10px !important;
-        transform: none !important; /* Matikan transform bawaan */
+        transform: none !important; 
     }
-
-    /* 3. TOMBOL 'LIHAT SELENGKAPNYA' */
+   
     .mobile-toggle-btn {
-        display: block !important; /* Pastikan tombol muncul */
+        display: block !important; 
         margin-top: 8px;
         padding: 6px 15px;
         background: rgba(201, 169, 97, 0.1);
@@ -2592,63 +2556,65 @@
         text-align: center;
     }
 
-    /* 4. LOGIKA KETIKA CARD DI-EXPAND (DIBUKA) */
+    
     .is-open {
-        /* Bikin tampilan card lebih bagus saat terbuka */
+       
         padding: 25px !important; 
         background: rgba(26, 58, 46, 0.6) !important;
         border: 1px solid #c9a961 !important;
     }
     
-    /* Munculkan kembali elemen yang di-hide jika punya class .is-open */
+    
     .is-open .skill-desc, 
     .is-open .study-desc, 
-    .is-open .project-desc, .is-open .project-tags, .is-open .project-image, 
     .is-open .hobby-desc, .is-open .hobby-number,
-    .is-open .music-desc, .is-open .spotify-embed,
     .is-open .poem-text, 
-    .is-open .thought-text,
-    .is-open .book-desc, .is-open .book-cover, .is-open .book-author,
+    .is-open .book-desc,
     .is-open .project-small-desc, .is-open .project-small-icon,
     .is-open .trait-desc {
-        /* Gunakan block atau flex tergantung jenis konten */
         display: block !important; 
         animation: fadeIn 0.5s ease;
         margin-top: 15px !important;
     }
     
-    /* Khusus gambar (agar tidak tumpang tindih) */
     .is-open .project-image, .is-open .book-cover {
         display: flex !important;
         height: auto !important;
         margin-bottom: 15px !important;
     }
 }
-    </style>
-  <style>@view-transition { navigation: auto; }</style>
-  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
-  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
-  <style>
-/* ==================== FINAL MOBILE LIST MODE CSS FIX ==================== */
-/* Menggunakan media query untuk layar mobile */
+/* ==================== RESPONSIF KOMPREHENSIF DAN LIST MODE FIX ==================== */
 @media (max-width: 768px) {
     
-    /* 1. Reset Semua Card ke Mode List (Sangat Spesifik) */
+    /* Global Reset dan Layout Rapat */
+    section {
+        padding: 40px 15px !important; /* Kurangi padding section */
+    }
+    .grid-4, .grid-3, .grid-2 {
+        grid-template-columns: 1fr !important; /* Semua grid jadi 1 kolom */
+        gap: 12px !important; /* Kurangi jarak antar card */
+    }
+    
+    /* Reset Card ke Mode List (Sangat Spesifik) */
     .skill-card, .study-card, .project-card, .hobby-card, .music-card, .poem-card, .thought-card, .book-card, .project-small, .infj-trait {
-        /* Memaksa card jadi tipis */
         min-height: 0 !important;
         height: auto !important;
         padding: 15px 20px !important;
-        margin-bottom: 12px !important;
-        transition: all 0.5s ease !important; /* Agar transisi membuka/menutup mulus */
-        transform: none !important; /* Matikan semua transform bawaan (hover, dll) */
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2) !important; /* Kunci bayangan biar stabil */
+        margin-bottom: 5px !important;
+        transition: all 0.5s ease !important;
+        transform: none !important; /* Matikan semua transform/hover efek */
+        box-shadow: none !important; /* Hilangkan bayangan bawaan */
     }
     
-    /* 2. Sembunyikan KONTEN DESKRIPTIF/BESAR (Sangat Spesifik menggunakan Child Selector) */
+    /* Nonaktifkan Hover Effect di Mobile */
+    .skill-card:hover, .study-card:hover, .project-card:hover, .hobby-card:hover, .music-card:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+
+    /* Sembunyikan KONTEN DESKRIPTIF/BESAR SECARA DEFAULT */
     .skill-card > .skill-desc, 
     .study-card > .study-desc, 
-    /* Project card perlu selektor agak beda karena strukturnya berbeda */
     .project-card .project-desc, 
     .project-card .project-tags, 
     .project-card .project-image, 
@@ -2665,9 +2631,9 @@
         opacity: 0 !important;
     }
     
-    /* 3. Style Tombol */
+    /* Tombol Lihat Selengkapnya */
     .mobile-toggle-btn {
-        display: block !important; /* Pastikan tombol muncul */
+        display: block !important; 
         margin-top: 10px;
         padding: 6px 15px;
         background: rgba(201, 169, 97, 0.1);
@@ -2678,18 +2644,15 @@
         letter-spacing: 1px;
         border-radius: 50px;
         cursor: pointer;
-        transition: all 0.3s ease;
         width: 100%;
         text-align: center;
     }
 
-    /* 4. TAMPILKAN KONTEN SAAT IS-OPEN (DIKLIK) */
+    /* TAMPILKAN KONTEN SAAT IS-OPEN (DIKLIK) */
     .is-open {
-        /* Bikin tampilan card lebih bagus saat terbuka */
         padding: 25px !important; 
         background: rgba(26, 58, 46, 0.8) !important;
         box-shadow: 0 0 40px rgba(0, 0, 0, 0.5) !important;
-        transform: none !important; /* Pastikan tidak ada transform yang mengganggu */
     }
 
     .is-open .skill-desc, 
@@ -2712,7 +2675,79 @@
         opacity: 1 !important;
     }
     
-    /* Perbaikan Khusus Project & Book Image */
+    .is-open .project-image, .is-open .book-cover {
+        display: flex !important;
+        height: auto !important;
+        margin-bottom: 15px !important;
+    }
+}
+@media (max-width: 768px) {
+    
+    .skill-card, .study-card, .hobby-card, .poem-card, .book-card, .project-small, .infj-trait {
+      
+        min-height: 0 !important;
+        height: auto !important;
+        padding: 15px 20px !important;
+        margin-bottom: 12px !important;
+        transition: all 0.5s ease !important; 
+        transform: none !important;
+    }
+    
+  
+    .skill-card > .skill-desc, 
+    .study-card > .study-desc, 
+    .hobby-card > .hobby-desc, 
+    .music-card > .music-desc, 
+    .music-card .spotify-embed, 
+    .poem-card > .poem-text, 
+    .book-card > .book-desc, 
+    .infj-trait > .trait-desc {
+        display: none !important; 
+        opacity: 0 !important;
+    }
+
+    .mobile-toggle-btn {
+        display: block !important; 
+        margin-top: 10px;
+        padding: 6px 15px;
+        background: rgba(201, 169, 97, 0.1);
+        border: 1px solid #c9a961;
+        color: #c9a961;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+        text-align: center;
+    }
+
+    
+    .is-open {
+        
+        padding: 25px !important; 
+        background: rgba(26, 58, 46, 0.8) !important;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.5) !important;
+        transform: none !important; 
+    }
+
+    .is-open .skill-desc, 
+    .is-open .study-desc, 
+    .is-open .project-desc, 
+    .is-open .hobby-desc, 
+    .is-open .music-desc, 
+    .is-open .spotify-embed, 
+    .is-open .poem-text, 
+    .is-open .book-desc,
+    .is-open .trait-desc {
+        display: block !important;
+        animation: fadeIn 0.5s ease;
+        margin-top: 15px !important;
+        opacity: 1 !important;
+    }
+    
+    
     .is-open .project-image, .is-open .book-cover {
         display: flex !important;
         height: auto !important;
@@ -2720,6 +2755,11 @@
     }
 }
 </style>
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+
  </head>
  <body><!-- Floating Particles -->
   <div class="particles-container">
@@ -3529,8 +3569,9 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 </script>
- <script>
-document.addEventListener("DOMContentLoaded", function() {
+<script>
+// Fungsi yang akan dijalankan segera (tanpa menunggu DOMContentLoaded)
+(function() {
     // Jalankan hanya di layar HP (lebar < 769px)
     if (window.innerWidth < 769) {
         
@@ -3540,48 +3581,112 @@ document.addEventListener("DOMContentLoaded", function() {
             '.project-small', '.infj-trait'
         ];
 
-        const allCards = document.querySelectorAll(cardSelectors.join(','));
+        // Bungkus dalam try/catch untuk mencegah skrip lain menghentikan fungsi ini
+        try {
+            const allCards = document.querySelectorAll(cardSelectors.join(','));
 
-        allCards.forEach(card => {
-            // Cek apakah tombol sudah ada
-            if (card.querySelector('.mobile-toggle-btn')) {
-                return;
-            }
-
-            // 1. Buat Tombol
-            const btn = document.createElement('div');
-            btn.className = 'mobile-toggle-btn';
-            btn.innerText = 'Lihat Selengkapnya +';
-
-            // 2. Tempel Tombol ke dalam Card
-            const contentArea = card.querySelector('.project-content'); 
-            if (contentArea) {
-                contentArea.appendChild(btn); // Untuk Project Card
-            } else {
-                card.appendChild(btn); // Untuk Card lainnya
-            }
-
-            // 3. Pasang Event Klik
-            btn.addEventListener('click', function(e) {
-                e.stopPropagation(); // Blok event agar tidak mengganggu script lain (e.g., study-card click bawaan)
-                
-                // Toggle Class Open pada card parent
-                card.classList.toggle('is-open');
-
-                // Ubah Teks Tombol & Style
-                if (card.classList.contains('is-open')) {
-                    btn.innerText = 'Tutup -';
-                    btn.style.background = '#c9a961';
-                    btn.style.color = '#0a1a2e';
-                } else {
-                    btn.innerText = 'Lihat Selengkapnya +';
-                    btn.style.background = 'rgba(201, 169, 97, 0.1)';
-                    btn.style.color = '#c9a961';
+            allCards.forEach(card => {
+                // Cek apakah tombol sudah ada
+                if (card.querySelector('.mobile-toggle-btn')) {
+                    return;
                 }
+
+                // 1. Buat Tombol
+                const btn = document.createElement('div');
+                btn.className = 'mobile-toggle-btn';
+                btn.innerText = 'Lihat Selengkapnya +';
+
+                // 2. Tempel Tombol ke dalam Card
+                const contentArea = card.querySelector('.project-content'); 
+                if (contentArea) {
+                    contentArea.appendChild(btn); 
+                } else {
+                    card.appendChild(btn); 
+                }
+
+                // 3. Pasang Event Klik
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Blok event agar tidak mengganggu script lain
+                    
+                    card.classList.toggle('is-open');
+
+                    // Ubah Teks Tombol & Style
+                    if (card.classList.contains('is-open')) {
+                        btn.innerText = 'Tutup -';
+                        btn.style.background = '#c9a961';
+                        btn.style.color = '#0a1a2e';
+                    } else {
+                        btn.innerText = 'Lihat Selengkapnya +';
+                        btn.style.background = 'rgba(201, 169, 97, 0.1)';
+                        btn.style.color = '#c9a961';
+                    }
+                });
             });
-        });
+        } catch (error) {
+            console.error("Compact card script error:", error);
+        }
     }
-});
+})();
+</script>
+<script>
+// Fungsi yang akan dijalankan segera (tanpa menunggu DOMContentLoaded)
+(function() {
+    // Jalankan hanya di layar HP (lebar < 769px)
+    if (window.innerWidth < 769) {
+        
+        const cardSelectors = [
+            '.skill-card', '.study-card', '.project-card', '.hobby-card', 
+            '.music-card', '.poem-card', '.thought-card', '.book-card', 
+            '.project-small', '.infj-trait'
+        ];
+
+        // Bungkus dalam try/catch
+        try {
+            const allCards = document.querySelectorAll(cardSelectors.join(','));
+
+            allCards.forEach(card => {
+                // Cek apakah tombol sudah ada
+                if (card.querySelector('.mobile-toggle-btn')) {
+                    return;
+                }
+
+                // 1. Buat Tombol
+                const btn = document.createElement('div');
+                btn.className = 'mobile-toggle-btn';
+                btn.innerText = 'Lihat Selengkapnya +';
+
+                // 2. Tempel Tombol ke dalam Card
+                const contentArea = card.querySelector('.project-content'); 
+                if (contentArea) {
+                    contentArea.appendChild(btn); 
+                } else {
+                    card.appendChild(btn); 
+                }
+
+                // 3. Pasang Event Klik
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Blok event agar tidak mengganggu script lain
+                    
+                    card.classList.toggle('is-open');
+
+                    // Ubah Teks Tombol & Style
+                    if (card.classList.contains('is-open')) {
+                        btn.innerText = 'Tutup -';
+                        btn.style.background = '#c9a961';
+                        btn.style.color = '#0a1a2e';
+                    } else {
+                        btn.innerText = 'Lihat Selengkapnya +';
+                        btn.style.background = 'rgba(201, 169, 97, 0.1)';
+                        btn.style.color = '#c9a961';
+                    }
+                });
+            });
+        } catch (error) {
+            // Error ditangkap, tapi skrip tidak akan crash
+            console.error("Script Compact Mode Gagal Dijalankan:", error);
+        }
+    }
+})();
 </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a8c053dc03afd64',t:'MTc2NDg1ODgyMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
